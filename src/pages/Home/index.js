@@ -4,14 +4,14 @@ import useAuth from "../../hooks/useAuth";
 
 const HomePage = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate("/login");
+  //   }
+  // }, [user]);
 
-  return <div>HomePage</div>;
+  return <div>HomePage{JSON.stringify(user)}</div>;
 };
 
 export default HomePage;
