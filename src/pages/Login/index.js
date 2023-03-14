@@ -4,6 +4,7 @@ import { SignUp } from "../../firebase";
 import { clsx } from "clsx";
 import useAuth from "../../hooks/useAuth";
 import { async } from "@firebase/util";
+import { Input, SignUpModal } from "../../components";
 
 function LoginPage() {
   const { signInWithEmailAndPassword, user } = useAuth();
@@ -51,7 +52,7 @@ function LoginPage() {
         <div className="bg-white shadow-lg grid gap-y-6 rounded-md p-5">
           <form className="grid gap-y-6" onSubmit={onSubmit}>
             <div className="w-full">
-              <input
+              {/* <input
                 value={formData.email}
                 onChange={onChange}
                 type="text"
@@ -67,21 +68,38 @@ function LoginPage() {
                 <p className="text-red-400 text-sm mt-2 pl-2">
                   Email is required
                 </p>
+              ) : null} */}
+               <Input
+                value={formData.email}
+                type="text"
+                name="email"
+                className={clsx(
+                  "px-4 py-[16px]",
+                  errors.includes("email") &&
+                    "focus-visible:outline-red-500 border-red-500"
+                )}
+                placeholder="Email Address or phone number"
+                onChange={onChange}
+              />
+              {errors.includes("email") ? (
+                <p className="text-red-400 text-sm mt-2 pl-2">
+                  Email is required
+                </p>
               ) : null}
             </div>
 
             <div className="w-full">
-              <input
+            <Input
                 value={formData.password}
-                onChange={onChange}
                 type="password"
                 name="password"
                 className={clsx(
-                  "w-full border-2 border-gray-200 rounded-md p-4 focus-visible:outline-blue-500",
-                  errors.includes("password") &&
-                    " focus-visible:outline-red-500 border-red-500"
+                  "px-4 py-[16px]",
+                  errors.includes("email") &&
+                    "focus-visible:outline-red-500 border-red-500"
                 )}
                 placeholder="Password"
+                onChange={onChange}
               />
               {errors.includes("password") ? (
                 <p className="text-red-400 text-sm mt-2 pl-2">
@@ -106,9 +124,7 @@ function LoginPage() {
           <hr />
 
           <div className="flex items-center justify-center">
-            <button className="bg-green-500 max-w-max text-white rounded-md py-3 px-4 font-bold">
-              Create new account
-            </button>
+            <SignUpModal />
           </div>
         </div>
       </div>
