@@ -8,3 +8,5 @@ export { default as CircleIcon } from "./CircleIcon";
 export { default as RightMenu } from "./RightMenu";
 export { default as Tooltip } from "./Tooltip";
 export { default as Avatar } from "./Avatar";
+export { default as SideBarRow } from "./SideBarRow";
+export { default as WhiteBox } from "./WhiteBox";

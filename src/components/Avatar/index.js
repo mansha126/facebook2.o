@@ -1,13 +1,17 @@
+import clsx from "clsx";
 import React from "react";
-import { Tooltip } from "..";
 
-function Avatar({ src, width }) {
+function Avatar({ src, width, className, enableBorder }) {
   return (
-    <Tooltip title="Account">
-      <div className="rounded-full overflow-hidden">
-        <img src={src} alt="" width={width || "43px"} />
-      </div>
-    </Tooltip>
+    <div
+      className={clsx(
+        "rounded-full overflow-hidden",
+        className,
+        enableBorder && "border-[4px] border-blue-500"
+      )}
+    >
+      <img src={src} alt="" width={width || "43px"} />
+    </div>
   );
 }
 
