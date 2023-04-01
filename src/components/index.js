@@ -4,3 +4,7 @@ export { default as SelectInput } from "./SelectInput";
 export { default as SignUpRadio } from "./SignUpRadio";
 export { default as Header } from "./Header";
 export { default as TabBar } from "./TabBar";
+export { default as CircleIcon } from "./CircleIcon";
+export { default as RightMenu } from "./RightMenu";
+export { default as Tooltip } from "./Tooltip";
+export { default as Avatar } from "./Avatar";
