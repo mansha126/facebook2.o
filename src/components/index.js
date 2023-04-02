@@ -10,3 +10,7 @@ export { default as Tooltip } from "./Tooltip";
 export { default as Avatar } from "./Avatar";
 export { default as SideBarRow } from "./SideBarRow";
 export { default as WhiteBox } from "./WhiteBox";
+export { default as StoryCard } from "./StoryCard";
+export { default as StoryController } from "./StoryController";
+export { default as PostController } from "./PostController";
+export { default as SidebarHeadingRow } from "./SidebarHeadingRow";
