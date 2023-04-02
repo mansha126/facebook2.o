@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Avatar, Header, SideBarRow, TabBar, WhiteBox } from "../../components";
@@ -29,7 +29,7 @@ import {
   Saved,
   Watch,
 } from "../../assets/facebookIcons";
-import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+import * as AspectRatio from "@radix-ui/react-aspect-ratio";
 const leftSideBarMenus = [
   {
     id: "profile",
@@ -197,6 +197,7 @@ const HomePage = () => {
 export default HomePage;
 
 function MidColHeader() {
+  const topRowRef = useRef(null); //for selecting any element we use useRef hook and use ref to select element =by using useRef we don't have to use getElementById or querySelector.
   const tabs = [
     {
       id: "stories",
@@ -211,6 +212,16 @@ function MidColHeader() {
   ];
 
   const [tab, setTab] = useState(tabs[0]);
+  const [topRowScrollValue, setTopRowScrollValue] = useState(0);
+  useEffect(() => {
+    const onScroll = (e) => {
+      setTopRowScrollValue(e.target.scrollLeft)
+    }
+    topRowRef?.current?.removeEventListener("scroll",onScroll)
+    topRowRef?.current?.addEventListener("scroll", onScroll, { passive: true })
+    return()=>window.removeEventListener("scroll",onScroll)
+  }, [])
+  
   return (
     <WhiteBox>
       <div className="px-4 pt-1 border-b-[1px] pb-2">
@@ -222,8 +233,11 @@ function MidColHeader() {
           onTabClick={(tab) => setTab(tab)}
         />
       </div>
-      <div className="py-5">
-        <div className="flex items-center gap-x-3 overflow-x-scroll w-full hide-scrollbar">
+      <div className="py-5 relative">
+        <div
+          ref={topRowRef}
+          className="flex items-center gap-x-3 overflow-x-scroll w-full hide-scrollbar px-4"
+        >
           <ImageCard img={testImage} />
           <ImageCard img={testImage} />
           <ImageCard img={testImage} />
@@ -233,6 +247,23 @@ function MidColHeader() {
           <ImageCard img={testImage} />
           <ImageCard img={testImage} />
         </div>
+        {topRowScrollValue > 0 ? (
+          <div
+            className="absolute bg-white h-16 w-16 cursor-pointer rounded-full top-2/4 left-8"
+            onClick={() => {
+              topRowRef.current.scrollLeft -= 100;
+            }}
+          ></div>
+        ) : null}
+        {topRowScrollValue !== topRowRef?.current?.scrollWidth ? (
+          <div
+            className="absolute bg-white h-16 w-16 cursor-pointer rounded-full top-2/4 right-8"
+            onClick={() => {
+              topRowRef.current.scrollLeft += 100;
+              // console.log({ row: topRowRef.current });
+            }}
+          ></div>
+        ) : null}
       </div>
     </WhiteBox>
   );
